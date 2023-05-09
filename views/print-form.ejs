@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Form</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/upload.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/upload.js"></script>
+</head>
+<body>
+    <nav>
+        <img id="logo" class="logo" src="assets/imgs/logo-transparent.png" alt="logo">
+        <img class="nav-mobile-toggle" src="assets/imgs/bars-solid.svg" alt="">
+        <div class="menu-items">
+            <ul class="list-items">
+                <li class="nav-mobile-close">X</li>
+                <a href="#features">
+                    <li class="item">Features</li>
+                </a>
+                <a href="#price">
+                    <li class="item">Price</li>
+                </a>
+                <a href="#about-us">
+                    <li class="item">About Us</li>
+                </a>
+                <a href="#contact-us">
+                    <li class="item">Contact Us</li>
+                </a>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="form">
+        <div class="upload-form" id="aks-file-upload"></div>
+        <p id="uploadfile" type="json"></p>
+    </section>
+    <script>
+        $(function () {
+                $("#aks-file-upload").aksFileUpload({
+                    fileUpload: "#uploadfile", // With target [input]file or [type]json you can save the data of loaded items
+                    fileType: ["c", "css", "pdf", "docx", "rtf", "jpg", "jpeg", "png", "py", "md", "txt"], // allowed file formats
+                    dragDrop: true, // drag & drop upload
+                    maxSize: "90 GB", // maximum uploaded file size
+                    multiple: true, // multiple file upload
+                    maxFile: 20, // maximum number of uploaded files
+                    maxFileError: "File exceeds upload limit. - Max limit:", // error text
+                    maxSizeError: "File exceeds size. - Max limit:", // error text
+                    fileTypeError: "Disallowed file format.", // error text
+                    label: "Drag & Drop your files or Browse" // label text
+                });
+            });
+    </script>
+
+
+    
+</body>
+</html>
