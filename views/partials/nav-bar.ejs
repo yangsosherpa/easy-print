@@ -1,21 +1,33 @@
 <nav>
-    <img id="logo" class="logo" src="assets/imgs/logo-transparent.png" alt="logo">
-    <img class="nav-mobile-toggle" src="assets/imgs/bars-solid.svg" alt="">
-    <div class="menu-items">
-        <ul class="list-items">
-            <li class="nav-mobile-close">X</li>
-            <a href="#features">
-                <li class="item">Features</li>
-            </a>
-            <a href="#price">
-                <li class="item">Price</li>
-            </a>
-            <a href="#about-us">
-                <li class="item">About Us</li>
-            </a>
-            <a href="#contact-us">
-                <li class="item">Contact Us</li>
-            </a>
-        </ul>
-    </div>
+  <img id="logo" class="logo" src="/assets/imgs/logo-transparent.png" alt="logo">
+  <img class="nav-mobile-toggle" src="/assets/imgs/bars-solid.svg" alt="">
+  <div class="menu-items">
+    <ul class="list-items">
+      <li class="nav-mobile-close">X</li>
+      <a href="#features">
+        <li class="item">Features</li>
+      </a>
+      <a href="#price">
+        <li class="item">Price</li>
+      </a>
+      <a href="#about-us">
+        <li class="item">About Us</li>
+      </a>
+      <a href="#contact-us">
+        <li class="item">Contact Us</li>
+      </a>
+      <% if (isLoggedIn) { %>
+      <a href="/auth/logout">
+        <li class="item auth-btn">Logout</li>
+      </a>
+      <% } else { %>
+      <a href="/auth/register">
+        <li class="item auth-btn">Register Vendor</li>
+      </a>
+      <a href="/auth/login">
+        <li class="item auth-btn">Login Vendor</li>
+      </a>
+      <% } %>
+    </ul>
+  </div>
 </nav>

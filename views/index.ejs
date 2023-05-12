@@ -1,84 +1,90 @@
 <%-include ('partials/base-partials.ejs') %>
-<body>
-    <!-- Header -->
-    <%- include('partials/nav-bar') %>
 
-    <!-- Body -->
-    <section id="features" class="container">
-            <img class="col-1" src="assets/imgs/header-img.svg" alt="header-img">
-        <div class="col-2">
-            <div class="section">
-                <div class="section-title">
-                    <h1>Affordable</h1>
-                </div>
-                <div class="section-text">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe quaerat autem, consectetur aperiam excepturi, sequi animi aut, harum quia ipsam soluta recusandae rem dolorem accusantium architecto. Et maiores est ut provident, magnam voluptates nostrum.
-                </div>
-            </div>
-            <div class="section">
-                <div class="section-title">
-                    <h1>Easy to Use</h1>
-                </div>
-                <div class="section-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi dolorum iure fuga tenetur, sint nam consequatur possimus perspiciatis. Vel consequatur voluptatem perspiciatis numquam laborum commodi recusandae qui, nobis, tenetur dolor error doloribus architecto sunt.
-                </div>
-            </div>
-            <a href="/print-form" class="btn" type="submit">Get Started &#8594;</a>
-        </div>
-        
-    </section>
-    <hr>
-    
-    <!-- Price Section -->
-    <section id="price" class="container section-container">
+<body>
+  <!-- Header -->
+  <%- include('partials/nav-bar') %>
+
+  <!-- Body -->
+  <section id="features" class="container">
+    <img class="col-1" src="assets/imgs/header-img.svg" alt="header-img">
+    <div class="col-2">
+      <div class="section">
         <div class="section-title">
-            <h1>Pricing Plans</h1>
+          <h1>Affordable</h1>
         </div>
-        <div class="column">
-            <h1>Plan 1</h1>
-            <p class="col-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate voluptatem hic reprehenderit laborum! Adipisci animi repellat eligendi repellendus quam enim possimus ipsa mollitia accusamus.</p>
+        <div class="section-text">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe quaerat autem, consectetur aperiam excepturi, sequi animi aut, harum quia ipsam soluta recusandae rem dolorem accusantium architecto. Et maiores est ut provident, magnam voluptates nostrum.
         </div>
-        <div class="column ">
-            <h1>Plan 2</h1>
-            <p class="col-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore deleniti, consequatur corrupti repudiandae assumenda similique ad corporis, consectetur nisi eius molestiae. Et, nostrum aliquam.</p>
-        </div>
-        <div class="column">
-            <h1>Plan 3</h1>
-            <p class="col-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, ex consectetur mollitia voluptates cupiditate animi laboriosam quae ad accusamus iure veritatis magni voluptate rerum!</p>
-        </div>
-    </section>
-    <hr>
-    <section id="about-us" class="container section-container">
+      </div>
+      <div class="section">
         <div class="section-title">
-            <h1>Meet Our Team</h1>
+          <h1>Easy to Use</h1>
         </div>
-        <div class="column col-team">
-            <h1>Yangso Sherpa</h1>
-            <img class="team-image" src="assets/imgs/yangso.enc" alt="">
-            <p class="col-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore deleniti, consequatur corrupti repudiandae assumenda
-                similique ad corporis, consectetur nisi eius molestiae. Et, nostrum aliquam.
-            </p>
+        <div class="section-text">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi dolorum iure fuga tenetur, sint nam consequatur possimus perspiciatis. Vel consequatur voluptatem perspiciatis numquam laborum commodi recusandae qui, nobis, tenetur dolor error doloribus architecto sunt.
         </div>
-        <div class="column col-team">
-            <h1>Meghna Dahal</h1>
-            <img src="assets/imgs/meghna.jpg" alt="" class="team-image">
-            <p class="col-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore deleniti, consequatur corrupti repudiandae assumenda
-                similique ad corporis, consectetur nisi eius molestiae. Et, nostrum aliquam.
-            </p>
-        </div>
-        <div class="column col-team">
-            <h1>Sejal Chhetri</h1>
-            <img src="assets/imgs/sejal.jpg" alt="" class="team-image">
-            <p class="col-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore deleniti, consequatur corrupti repudiandae assumenda
-                similique ad corporis, consectetur nisi eius molestiae. Et, nostrum aliquam.
-            </p>
-        </div>
-    </section>
-    <footer>
-        <p>All rights Reserved &copy; 2023 Ellora</p>
-    </footer>
+      </div>
+      <% if (isLoggedIn) { %>
+      <a href="/vendor/<%= vendor.name %>" class="btn" type="submit">Dashboard</a>
+      <% } else { %>
+      <a href=" /print-form" class="btn" type="submit">Get Started &#8594;</a>
+      <% } %>
+    </div>
+
+  </section>
+  <hr>
+
+  <!-- Price Section -->
+  <section id="price" class="container section-container">
+    <div class="section-title">
+      <h1>Pricing Plans</h1>
+    </div>
+    <div class="column">
+      <h1>Plan 1</h1>
+      <p class="col-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate voluptatem hic reprehenderit laborum! Adipisci animi repellat eligendi repellendus quam enim possimus ipsa mollitia accusamus.</p>
+    </div>
+    <div class="column ">
+      <h1>Plan 2</h1>
+      <p class="col-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore deleniti, consequatur corrupti repudiandae assumenda similique ad corporis, consectetur nisi eius molestiae. Et, nostrum aliquam.</p>
+    </div>
+    <div class="column">
+      <h1>Plan 3</h1>
+      <p class="col-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, ex consectetur mollitia voluptates cupiditate animi laboriosam quae ad accusamus iure veritatis magni voluptate rerum!</p>
+    </div>
+  </section>
+  <hr>
+  <section id="about-us" class="container section-container">
+    <div class="section-title">
+      <h1>Meet Our Team</h1>
+    </div>
+    <div class="column col-team">
+      <h1>Yangso Sherpa</h1>
+      <img class="team-image" src="assets/imgs/yangso.enc" alt="">
+      <p class="col-text">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore deleniti, consequatur corrupti repudiandae assumenda
+        similique ad corporis, consectetur nisi eius molestiae. Et, nostrum aliquam.
+      </p>
+    </div>
+    <div class="column col-team">
+      <h1>Meghna Dahal</h1>
+      <img src="assets/imgs/meghna.jpg" alt="" class="team-image">
+      <p class="col-text">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore deleniti, consequatur corrupti repudiandae assumenda
+        similique ad corporis, consectetur nisi eius molestiae. Et, nostrum aliquam.
+      </p>
+    </div>
+    <div class="column col-team">
+      <h1>Sejal Chhetri</h1>
+      <img src="assets/imgs/sejal.jpg" alt="" class="team-image">
+      <p class="col-text">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore deleniti, consequatur corrupti repudiandae assumenda
+        similique ad corporis, consectetur nisi eius molestiae. Et, nostrum aliquam.
+      </p>
+    </div>
+  </section>
+  <footer>
+    <p>All rights Reserved &copy; 2023 Ellora</p>
+  </footer>
 </body>
+
 </html>

@@ -13,6 +13,6 @@ $('document').ready(function(){
 
     // logo to route index.html
     $('#logo').click(function(){
-        window.location.href = 'index.html';
+        window.location.href = '/';
     })
 });
