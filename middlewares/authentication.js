@@ -11,7 +11,9 @@ async function verifyVendor(req, res, next) {
     const password = req.body.password;
     const vendorExists = await Vendor.exists({ phoneNumber: vendorNumber });
     if (!vendorExists) {
+        console.log('User does not exist');
         const context = {
+            type: 'error',
             message: "User does not exist"
         }
         res.render('auth/login', context);
@@ -31,7 +33,9 @@ function verifyPassword(req, res, next) {
             vendor.password
             );
         if (!isValid) {
+            console.log('Password is not valid');
             const context = {
+                type: 'error',
                 message: "Invalid Password",
             }
             res.render('auth/login', context);
@@ -43,8 +47,11 @@ function verifyPassword(req, res, next) {
         next();
     }catch(err) {
         console.log(err);
-        res.sendStatus(500).send('Internal Server Error');
-
+        const context = {
+            type: 'error',
+            message: "Invalid Password",
+        }
+        res.render('auth/login', context);
     }
 }
 
@@ -55,6 +62,7 @@ async function generateToken(req, res, next) {
         const tokenObject = req.vendor.tokenObj;
         if (!tokenObject.isValid) {
             const context = {
+                type: 'error',
                 message: "Invalid Token"
             }
             res.render('auth/login', context);
@@ -73,7 +81,7 @@ async function generateToken(req, res, next) {
         next(); 
         }catch(err) {
             console.log(err);
-            res.sendStatus(500).send('Internal Server Error');
+            res.render('auth/login', {type: 'error', message: 'Invalid Token'});
         }
 };
 
@@ -93,11 +101,19 @@ function isAuthenticated (req, res, next) {
                 next();
             }
             else {
-                res.redirect('/auth/login');
+                const context = {
+                    type: 'error',
+                    message: 'Invalid Token',
+                }
+                res.render('/auth/login', context);
             }
         } catch (err) {
             console.log(err);
-            res.redirect('/auth/login');
+            const context = {
+                type: 'error',
+                message: 'Some Error Occured'
+            }
+            res.render('/auth/login', context);
         }
     }
 }

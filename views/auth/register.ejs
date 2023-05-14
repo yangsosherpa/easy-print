@@ -8,19 +8,20 @@
   <div class="container my-4">
     <h1><u>Register Page</u></h1>
 
-    <% if (message) { %>
+    <% if (type === 'error') { %>
     <div class="container">
       <div class="alert alert-danger" role="alert">
-        <%= message %>
+        <h4 class="alert-heading">Error!</h4>
+        <p><%= message %></p>
       </div>
-      <%- include('partials/register-form') %>
-      <p>Already have an account! <a href="/auth/login">Click Here</a> to login!</p>
     </div>
-    <% } else { %>
-    <div class="container">
-      <%- include('partials/register-form') %>
-      <p>Already have an account! <a href="/auth/login">Click Here</a> to login! Or <a href="/">Go Back</a></p>
-    </div>
-    <% } %>
+    <%- include('partials/register-form') %> <p>Already have an account! <a href="/auth/login">Click Here</a> to login!</p>
+  </div>
+  <% } else { %>
+  <div class="container">
+    <%- include('partials/register-form') %>
+    <p>Already have an account! <a href="/auth/login">Click Here</a> to login! Or <a href="/">Go Back</a></p>
+  </div>
+  <% } %>
 
 </body>

@@ -7,7 +7,24 @@
 <body>
   <div class="container my-4">
     <h1><u>Login Page</u></h1>
-    <%- include('partials/login-form.ejs') %>
-    <p>Don't have an account! <a href="/auth/register">Click Here</a> to register! Or <a href="/">Go Backz</a></p>
-  </div>
+    <% if (type === 'error') { %>
+    <div class="container">
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Error!</h4>
+        <p><%= message %></p>
+      </div>
+      <%- include('partials/login-form.ejs') %>
+      <p>Don't have an account! <a href="/auth/register">Click Here</a> to register! Or <a href="/">Go Backz</a></p>
+
+      <%} else if (type === 'success') { %>
+      <div class="container">
+        <div class="alert alert-success" role="alert">
+          <h4 class="alert-heading">Success!</h4>
+          <p><%= message %></p>
+        </div>
+        <%- include('partials/login-form.ejs') %>
+        <p>Don't have an account! <a href="/auth/register">Click Here</a> to register! Or <a href="/">Go Backz</a></p>
+        <% } else { %> <%- include('partials/login-form.ejs') %> <p>Don't have an account! <a href="/auth/register">Click Here</a> to register! Or <a href="/">Go Backz</a></p>
+        <% } %>
+      </div>
 </body>

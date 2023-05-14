@@ -3,26 +3,21 @@ const router = express.Router();
 const Vendor = require('../../models/Vendor');
 const logger = require('../../middlewares/logger');
 const { verifyPassword, verifyVendor, generateToken } = require('../../middlewares/authentication');
+const { passwordValidator, phoneNumberValidator } = require('../../middlewares/validators');
 
 const registerGetHandler = (req, res) => {
-  const message = req.session?.message;
-  res.render('auth/register', {message: message});
+  console.log('Handler Function: Register Get')
+  res.render('auth/register', {type: null, message: null});
 }
 
 const registerPostHandler = async (req, res) => {
+  console.log('Handler Function: Register Post');
+
   const phoneNumber = req.body.phoneNumber;
   const vendorName = req.body.vendorName;
   const password = req.body.password;
 
-  console.log(`Phone Number: ${phoneNumber}`);
-  userExists = await Vendor.exists({ phoneNumber: phoneNumber });
-  if (userExists) {
-    const context = { 
-      message: "User already exists"
-    }
-    res.render('auth/register', context);
-  }
-
+  // console.log(`Phone Number: ${phoneNumber}`);
   const vendorObj = {
     phoneNumber: phoneNumber,
     name: vendorName,
@@ -35,22 +30,33 @@ const registerPostHandler = async (req, res) => {
     console.log(err);
   });
   const context = {
-    message: 'User created successfully'
+    type: 'success',
+    message: 'User created successfully! Login to Enter Dashboard.'
   }
-  res.render('auth/register', context);
+  res.render('auth/login', context);
 }
 
 const loginGetHandler = (req, res) => {
-  res.render('auth/login');
+  console.log('Handler Function: Login Get');
+  const context = {
+    type: null,
+    message: null,
+  }
+  res.render('auth/login', context);
 }
 
 const loginPostHandler = (req, res) => {
+  console.log('Handler Function: Login Post');
   try {
     const token = req.vendor.token;
     req.session.token = token;
     req.session.message = 'Login Successful';
     req.session.vendor = req.vendor;
     console.log(req.session)
+    const context = {
+      type: 'success',
+      message: 'Login Successful',
+    }
     res.redirect(`/vendor/${req.vendor.name}`);
   } catch (err) {
     console.log(err);
@@ -67,7 +73,7 @@ const logoutGetHandler = (req, res) => {
 
 router.route('/register')
 .get(logger, registerGetHandler)
-.post(logger, registerPostHandler);
+.post(logger, phoneNumberValidator, passwordValidator, registerPostHandler);
 
 router.route('/login')
 .get(logger, loginGetHandler)
