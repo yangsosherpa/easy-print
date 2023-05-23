@@ -1,0 +1,50 @@
+<style>
+  select {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+  }
+
+  select:focus {
+    outline: none;
+    border-color: #5d9cec;
+  
+  .alert {
+  margin: 12vh;
+  padding: 10px;
+  border: 2px solid black;
+  }
+</style>
+
+  <% if (msg) {%>
+    <div class='alert'>
+        <%= msg %>
+    </div>
+    <% if (err) {%>
+        <%= err %>
+    <% } %>
+  <% } %>
+<form class="form" method="post" enctype="multipart/form-data">
+  <input type="file" multiple name="files">
+  <br>
+  <label for="droppoint">Drop Point</label>
+  <select class="form-select" name="droppoint" id="droppoint">
+    <option value="sjc">
+      St. Josephs College
+    </option>
+    <option value="gc">
+      Government College
+    </option>
+  </select>
+  <select class="form-select" name="vendorid">
+    <% vendors.forEach((vendor) => {%>
+    <option value="<%=vendor._id%>">
+      <%= vendor.name %>
+    </option>
+    <% }) %>
+  </select>
+  <button class=" btn" type="submit">Upload</button>
+</form>

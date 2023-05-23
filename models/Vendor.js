@@ -17,10 +17,10 @@ const vendorSchema = new Schema({
         type: String,
         required: true,
     },
-    files: [{
+    orders: [{
         name: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'File',
+            type:  Schema.Types.ObjectId,
+            ref: 'Order',
             default: null,
         }
     }]

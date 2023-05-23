@@ -1,17 +1,10 @@
 <%- include('partials/base-partials') %>
+
 <body>
-    <%- include('partials/nav-bar') %>
-    <section class="form">
-        <input 
-        type="file" 
-        multiple
-        data-pdf-preview-height="500"
-        data-pdf-component-extra-params="toolbar=0&navpanes=0&scrollbar=0&view=fitH">
-    </section>
-    
+  <%- include('partials/nav-bar') %>
+  <div class='container'>
+  <%- include('partials/dropbox-form') %>
+  </div>
 </body>
-<script src="https://unpkg.com/filepond-plugin-pdf-preview/dist/filepond-plugin-pdf-preview.min.js"></script>
-<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-<script src="js/uploadfiles.js"></script>
+
 </html>

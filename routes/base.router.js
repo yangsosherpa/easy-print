@@ -1,9 +1,31 @@
 const express = require('express');
-const path = require('path');
 const router = express.Router();
+const Vendors = require('../models/Vendor')
+const Orders = require('../models/Order')
+const multer = require('multer')
+const path = require('path')
+
+/*
+ * Used diskstorage for uploads
+*/
+const storage = multer.diskStorage({
+    destination: 'uploads',
+    filename: (req, file, cb) => {
+        console.log('Saving file in storage');
+        cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`)
+    }
+})
 
 
-router.get('/', (req, res) => {
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 1024 * 1024 * 20,  // max-size of upload is 20MB
+    },
+});
+
+
+const indexGetHandler = (req, res) => {
     console.log('View Handler Index');
     console.log(req.session);
     /* 
@@ -19,22 +41,72 @@ router.get('/', (req, res) => {
         return
     }
     res.render('index', { isLoggedIn: false });
-});
 
+};
 
-router.get('/print-form', (req, res)=>{
+const printFormGetHandler = async (req, res) => {
     console.log('View Handler Print Form');
+    const vendors = await Vendors.find()
     if (req.session?.isLoggedIn) {
         const context = {
             isLoggedIn: true,
             vendor: req.session.vendor,
+            vendors: vendors,
         }
         res.render('print-form', context);
         return
     } else {
-        res.render('print-form', {isLoggedIn: false});
+        const context = {
+            isLoggedIn: false,
+            vendors: vendors,
+            msg: null,
+            err: null,
+        }
+        res.render('print-form', context);
     };
-});
+
+};
+
+const printFormPostHandler = async (req, res) => {
+    console.log('View Handler Print Form Post');
+
+    const vendors = await Vendors.find()
+    const dropPoint = req.body.droppoint;  // destination for the files to be delivered
+    const files = req.files;  // tracks the list of files uploaded
+    const vendorid = req.body.vendorid;  // id of the vendor
+    const filePaths = files.map(file => file.path)
+
+    // save file in schema
+    const newOrder = Orders({
+        files: filePaths,
+        dropPoint: dropPoint
+    })
+    newOrder.save();
+
+    const context = {
+        isLoggedIn: false,
+        vendors: vendors,
+        msg: "Files successfully uploaded",
+        err: null,
+    }
+
+    const vendor = await Vendors.findOne({_id: vendorid});
+    vendor.orders.push(newOrder._id);
+    vendor.save(); 
+    console.log(vendor.orders)
+    console.log(context.msg)
+
+
+    res.render('print-form', context);
+}
+
+
+router.get('/', indexGetHandler);
+
+router.route('/print-form')
+.get(printFormGetHandler)
+.post(upload.array('files', 5), printFormPostHandler)
+
 
 
 

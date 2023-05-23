@@ -7,7 +7,7 @@ const db = {};
 
 db.mongoose = mongoose;
 db.vendor = require('./Vendor');
-db.file = require('./File');
+db.file = require('./Order');
 
 db.ROLES = ['vendor', 'admin'];
 
