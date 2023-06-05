@@ -4,9 +4,9 @@
   "description": "Website",
   "main": "app.js",
   "scripts": {
-    "start": "node src/app.js",
+    "start": "netlify serve src/app.js",
     "dev": "nodemon src/app.js",
-    "prod": "netlify-lambda build functions"
+    "prod": "netlify build functions"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

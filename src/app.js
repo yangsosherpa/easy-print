@@ -40,7 +40,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 // Using Routers
-app.use('/.netlify/functions/app', BaseRouter);
+app.use('/', BaseRouter);
 app.use('/auth', AuthRouter);
 app.use('/vendor', VendorRouter);
 
