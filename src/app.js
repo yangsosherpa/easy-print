@@ -34,13 +34,13 @@ app.use(session({
     saveUninitialized: false,
 }))
 
-
+app.engine('html', require('ejs').renderFile); 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 
 // Using Routers
-app.use('/', BaseRouter);
+app.use('/.netlify/functions/app', BaseRouter);
 app.use('/auth', AuthRouter);
 app.use('/vendor', VendorRouter);
 
