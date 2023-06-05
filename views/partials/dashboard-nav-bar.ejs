@@ -1,0 +1,20 @@
+<nav>
+  <img id="logo" class="logo" src="/assets/imgs/logo-transparent.png" alt="logo">
+  <img class="nav-mobile-toggle" src="/assets/imgs/bars-solid.svg" alt="">
+  <div class="menu-items">
+    <ul class="list-items">
+      <% if (isLoggedIn) { %>
+      <a href="/auth/logout">
+        <li class="item auth-btn">Logout</li>
+      </a>
+      <% } else { %>
+      <a href="/auth/register">
+        <li class="item auth-btn">Register Vendor</li>
+      </a>
+      <a href="/auth/login">
+        <li class="item auth-btn">Login Vendor</li>
+      </a>
+      <% } %>
+    </ul>
+  </div>
+</nav>

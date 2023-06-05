@@ -4,7 +4,7 @@ const Vendors = require('../models/Vendor')
 const Orders = require('../models/Order')
 const multer = require('multer')
 const path = require('path')
-
+const fs = require('fs')
 /*
  * Used diskstorage for uploads
 */
@@ -72,13 +72,22 @@ const printFormPostHandler = async (req, res) => {
 
     const vendors = await Vendors.find()
     const dropPoint = req.body.droppoint;  // destination for the files to be delivered
-    const files = req.files;  // tracks the list of files uploaded
     const vendorid = req.body.vendorid;  // id of the vendor
-    const filePaths = files.map(file => file.path)
+    const files = req.files.map(file => {
+        return {
+            originalname: file.originalname,
+            filename: file.filename,
+            contentType: file.mimetype,
+            data: fs.readFileSync(file.path),
+        }
+    })
+
+    console.log(Array.isArray(files));
+
 
     // save file in schema
     const newOrder = Orders({
-        files: filePaths,
+        files: files,
         dropPoint: dropPoint
     })
     newOrder.save();
@@ -106,8 +115,5 @@ router.get('/', indexGetHandler);
 router.route('/print-form')
 .get(printFormGetHandler)
 .post(upload.array('files', 5), printFormPostHandler)
-
-
-
 
 module.exports = router;
