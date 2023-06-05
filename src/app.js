@@ -4,6 +4,7 @@ const session = require('express-session');
 const app = express();
 const path = require('path');
 const port = 3000;
+const serverless = require('serverless-http');
 
 const BaseRouter = require('./routes/base.router');
 const AuthRouter = require('./routes/auth/auth.router');
@@ -39,12 +40,14 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 // Using Routers
-app.use('/', BaseRouter);
+app.use('/.netlify/functions', BaseRouter);
 app.use('/auth', AuthRouter);
 app.use('/vendor', VendorRouter);
 
 
-// Main Server
-app.listen(port, () => {
-    console.log('Server is running on port ' + port);
-});
+// // Main Server
+// app.listen(port, () => {
+//     console.log('Server is running on port ' + port);
+// });
+
+module.exports.handler = serverless(app);
