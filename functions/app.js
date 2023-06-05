@@ -40,14 +40,16 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 // Using Routers
-app.use('/.netlify/functions', BaseRouter);
+app.use('/.netlify/functions/app', BaseRouter);
 app.use('/auth', AuthRouter);
 app.use('/vendor', VendorRouter);
 
 
-// // Main Server
-// app.listen(port, () => {
-//     console.log('Server is running on port ' + port);
-// });
+// Main Server
+app.listen(port, () => {
+    console.log('Server is running on port ' + port);
+});
 
+
+module.exports = app;
 module.exports.handler = serverless(app);
